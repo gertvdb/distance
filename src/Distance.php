@@ -9,6 +9,7 @@ namespace Drupal\distance;
  */
 final class Distance implements DistanceInterface {
 
+  // Setup constants.
   const ONE_KILOMETRE_IN_MILES = 1.609344;
   const ONE_NAUTICAL_MILE_IN_MILES = 1.15077945;
   const UNITS = [
@@ -33,11 +34,14 @@ final class Distance implements DistanceInterface {
    *   The unit.
    */
   public function __construct(float $distance = NULL, string $unit) {
+
+    // Make sure a valid unit is passed.
     if (!in_array($unit, self::UNITS)) {
       throw new \Exception(t('The provided unit is not supported'));
     }
 
     // Convert the distance to miles on initialisation.
+    // This way we have a fixed value to work with.
     switch ($unit) {
       case 'KM':
         $this->distance = $distance / self::ONE_KILOMETRE_IN_MILES;
