@@ -5,13 +5,15 @@ namespace Drupal\distance;
 /**
  * Distance.
  *
- * A coordinate object to store coordinates.
+ * A distance object to store a distance.
  */
 final class Distance implements DistanceInterface {
 
-  // Setup constants.
+  // Setup constants for calculations.
   const ONE_KILOMETRE_IN_MILES = 1.609344;
   const ONE_NAUTICAL_MILE_IN_MILES = 1.15077945;
+
+  // Setup supported distance units.
   const UNITS = [
     'KM',
     'MI',
@@ -59,39 +61,21 @@ final class Distance implements DistanceInterface {
   }
 
   /**
-   * Provide distance in miles.
-   *
-   * @param int $decimals
-   *   The number of decimals to show.
-   *
-   * @return float|null
-   *   The distance in miles.
+   * {@inheritdoc}
    */
   public function toMiles(int $decimals = NULL) {
     return !$decimals ? $this->distance : round($this->distance, $decimals);
   }
 
   /**
-   * Provide distance in kilometres.
-   *
-   * @param int $decimals
-   *   The number of decimals to show.
-   *
-   * @return float|null
-   *   The distance in kilometres.
+   * {@inheritdoc}
    */
   public function toKilometers(int $decimals = NULL) {
     return !$decimals ? $this->distance * self::ONE_KILOMETRE_IN_MILES : round($this->distance * self::ONE_KILOMETRE_IN_MILES, $decimals);
   }
 
   /**
-   * Provide distance in nautical miles.
-   *
-   * @param int $decimals
-   *   The number of decimals to show.
-   *
-   * @return float|null
-   *   The distance in nautical miles.
+   * {@inheritdoc}
    */
   public function toNauticalMiles(int $decimals = NULL) {
     return !$decimals ? $this->distance * self::ONE_NAUTICAL_MILE_IN_MILES : round($this->distance * self::ONE_NAUTICAL_MILE_IN_MILES, $decimals);
