@@ -27,15 +27,17 @@ final class Distance implements DistanceInterface {
    */
   protected $distance;
 
-  /**
-   * Constructor.
-   *
-   * @param float $distance
-   *   The distance in a supported unit.
-   * @param string $unit
-   *   The unit.
-   */
-  public function __construct(float $distance = NULL, string $unit) {
+    /**
+     * Constructor.
+     *
+     * @param float $distance
+     *   The distance in a supported unit.
+     * @param string $unit
+     *   The unit.
+     *
+     * @throws \Exception
+     */
+  public function __construct(float $distance, string $unit) {
 
     // Make sure a valid unit is passed.
     if (!in_array($unit, self::UNITS)) {
